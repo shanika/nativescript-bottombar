@@ -1,25 +1,63 @@
-import { Observable } from 'data/observable';
-import * as app from 'application';
-import * as dialogs from 'ui/dialogs';
+import {View} from "tns-core-modules/ui/core/view";
+import {Property} from "tns-core-modules/ui/core/properties";
 
-export class Common extends Observable {
-  public message: string;
-
-  constructor() {
-    super();
-    this.message = Utils.SUCCESS_MSG();
-  }
+export const enum TITLE_STATE {
+  SHOW_WHEN_ACTIVE,
+  ALWAYS_SHOW,
+  ALWAYS_HIDE
 }
 
-export class Utils {
-  public static SUCCESS_MSG(): string {
-    let msg = `Your plugin is working on ${app.android ? 'Android' : 'iOS'}.`;
+export interface BottomBarItemInterface {
 
-    setTimeout(() => {
-      dialogs.alert(`${msg} For real. It's really working :)`).then(() => console.log(`Dialog closed.`));
-    }, 2000);
+  title: string;
+  icon: string;
+  color: string;
+  index: number;
+  notification?: string;
+  parent?: WeakRef<any>;
 
-    return msg;
-  }
 }
 
+
+export class BottomBarBase extends View {
+
+  public items : BottomBarItemInterface[];
+  public selected : number;
+  public titleState : TITLE_STATE;
+  public hide : boolean;
+
+}
+
+export const itemsProperty = new Property<BottomBarBase, BottomBarItemInterface[]> ({
+  name : "items",
+  equalityComparer : (a : BottomBarItemInterface[], b : BottomBarItemInterface[]) => a.length === b.length
+});
+
+itemsProperty.register(BottomBarBase);
+
+
+
+export const selectedIndexProperty = new Property<BottomBarBase, number> ({
+  name : "selectedIndex",
+  defaultValue : 0,
+  valueConverter : value => +value
+});
+
+selectedIndexProperty.register(BottomBarBase);
+
+
+
+export const titleStateProperty = new Property<BottomBarBase, TITLE_STATE> ({
+  name : "titleState"
+});
+
+titleStateProperty.register(BottomBarBase);
+
+
+
+export const hideProperty = new Property<BottomBarBase, boolean> ({
+  name : "hide",
+  valueConverter : value => Boolean(value)
+});
+
+hideProperty.register(BottomBarBase);
