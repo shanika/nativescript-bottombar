@@ -11,7 +11,6 @@ declare let com, android: any;
 let BitmapDrawable = android.graphics.drawable.BitmapDrawable;
 let AHBottomNavigation = com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 let AHBottomNavigationItem = com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
-let AHNotification = com.aurelhubert.ahbottomnavigation.notification.AHNotification;
 
 export class BottomBar extends BottomBarBase {
 
