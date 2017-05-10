@@ -9,9 +9,9 @@
     }
   },
   "dependencies": {
+    "nativescript-nativescript-bottombar": "file:///C:\\projects\\plugins\\nativescript-bottombar",
     "nativescript-theme-core": "^1.0.2",
     "nativescript-unit-test-runner": "^0.3.4",
-    "nativescript-nativescript-bottombar": "file:..",
     "tns-core-modules": "~2.5.2"
   },
   "devDependencies": {
